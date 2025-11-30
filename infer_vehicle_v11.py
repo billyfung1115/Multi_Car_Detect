@@ -12,7 +12,7 @@ WINDOW_NAME_IMAGE = "YOLOv11n - Image"
 WINDOW_NAME_VIDEO = "YOLOv11n - Video"
 WINDOW_NAME_WEBCAM = "YOLOv11n - Webcam"
 CONF_THRESH = 0.25
-IMG_SIZE = 640
+IMG_SIZE = 960
 
 
 def resize_for_display(img, max_width=MAX_DISPLAY_WIDTH):
@@ -176,7 +176,7 @@ def main():
     # === CHOOSE WHAT YOU WANT TO TEST ===
 
     # 1) Single image
-    image_path = r"C:\Users\Billy Fung\Downloads\Buses+-+LWB+New+Livery.jpg"
+    image_path = r"C:\Users\Billy Fung\Downloads\618f7f82-582a-42e6-b3fb-097d5deb4e1b.jpg"
     infer_image(model, project_dir, image_path)
 
     # 2) Video file
