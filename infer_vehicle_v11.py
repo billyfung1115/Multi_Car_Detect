@@ -176,8 +176,8 @@ def main():
     # === CHOOSE WHAT YOU WANT TO TEST ===
 
     # 1) Single image
-    # image_path = r"C:\Users\Billy Fung\Desktop\test_images\motorbike.jpg"
-    # infer_image(model, project_dir, image_path)
+    image_path = r"C:\Users\Billy Fung\Downloads\Buses+-+LWB+New+Livery.jpg"
+    infer_image(model, project_dir, image_path)
 
     # 2) Video file
     # video_path = r"C:\Users\Billy Fung\Desktop\test_videos\traffic.mp4"
