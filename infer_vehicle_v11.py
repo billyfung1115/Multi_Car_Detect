@@ -176,7 +176,7 @@ def main():
     # === CHOOSE WHAT YOU WANT TO TEST ===
 
     # 1) Single image
-    image_path = r"C:\Users\Billy Fung\Downloads\a23a3768-8e98-47f3-baf8-592b4a894fad.jpg"
+    image_path = r"demo image/car.jpg"
     infer_image(model, project_dir, image_path)
 
     # 2) Video file
