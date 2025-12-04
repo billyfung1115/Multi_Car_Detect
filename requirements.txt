@@ -1,0 +1,18 @@
+# Minimal requirements for Multi_Car_Detect
+# Adjust versions as needed for your system/GPU (CUDA) support
+
+ultralytics>=8.0.0
+opencv-python>=4.7.0
+numpy>=1.26.0
+# PyTorch: pick a stable release compatible with your CUDA (or CPU-only)
+# Example (CPU-only):
+# torch==2.2.2+cpu torchvision==0.18.3+cpu -f https://download.pytorch.org/whl/torch_stable.html
+# Example (CUDA 12.1):
+# torch==2.2.2+cu121 torchvision==0.18.3+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+
+# If you only want a simple install that lets pip pick the right torch, uncomment:
+# torch
+# torchvision
+
+# Optional but commonly useful
+pyyaml>=6.0
