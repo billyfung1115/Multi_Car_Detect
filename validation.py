@@ -22,7 +22,7 @@ def main():
 
     model.val(
         data=str(data_yaml),
-        device=0,
+        device="cpu",  # IMPORTANT: works even if no GPU
         project=str(runs_dir),
         name="val_vehicle",
         exist_ok=True,

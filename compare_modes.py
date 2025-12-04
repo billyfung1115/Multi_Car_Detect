@@ -9,13 +9,12 @@ def eval_model(weights_path: Path, label: str, data_yaml: Path):
         data=str(data_yaml),
         imgsz=640,
         batch=16,
-        device=0,
+        device="cpu",     # IMPORTANT: CPU so it works without CUDA
         verbose=False,
     )
 
     print(f"\n=== {label} ===")
     for k, v in metrics.results_dict.items():
-        # Some values are floats, some may be tensors; convert safely
         try:
             v_float = float(v)
             print(f"{k:25s}: {v_float:.4f}")
@@ -28,7 +27,7 @@ def eval_model(weights_path: Path, label: str, data_yaml: Path):
 def main():
     project_dir = Path(__file__).resolve().parent
 
-    # Adjust these paths if your folder names are different
+    # Existing trained weights (already produced on your machine)
     v8n_weights = project_dir / "runs" / "train_vehicle" / "weights" / "best.pt"
     v11n_weights = project_dir / "runs" / "train_vehicle_v11n_e40" / "weights" / "best.pt"
     data_yaml = project_dir / "vehicle.yaml"
@@ -45,10 +44,8 @@ def main():
     res_v8n = eval_model(v8n_weights, "YOLOv8n (40 epochs)", data_yaml)
     res_v11n = eval_model(v11n_weights, "YOLOv11n (40 epochs)", data_yaml)
 
-    # Discover actual keys available
     print("\nAvailable metric keys:", list(res_v8n.keys()))
 
-    # Use the actual keys your Ultralytics version uses
     keys = [
         "metrics/precision(B)",
         "metrics/recall(B)",
