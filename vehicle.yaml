@@ -1,4 +1,4 @@
-path: "C:/Users/Billy Fung/Desktop/Multi_Car_Detect/vehicle dataset"
+path: "vehicle dataset"
 
 train: train/images
 val: valid/images
