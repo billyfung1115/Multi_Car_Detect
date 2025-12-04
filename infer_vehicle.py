@@ -15,7 +15,6 @@ CONF_THRESH = 0.25
 IMG_SIZE = 640
 
 
-
 def resize_for_display(img, max_width=MAX_DISPLAY_WIDTH):
     """Resize image to a max width (for display only)."""
     h, w = img.shape[:2]
@@ -49,7 +48,7 @@ def infer_image(model, project_dir, source_path):
 
     results = model(
         str(source_path),
-        device=0,
+        device="cpu",          # <- changed from 0 to "cpu"
         conf=CONF_THRESH,
         imgsz=IMG_SIZE
     )
@@ -67,7 +66,7 @@ def infer_image(model, project_dir, source_path):
         cv2.imwrite(str(out_path), im)
         print(f"Saved annotated image to: {out_path}")
 
-        # --- DISPLAY (resized) ---
+        # DISPLAY (resized)
         display_im = resize_for_display(im).copy()
         cv2.imshow(WINDOW_NAME_IMAGE, display_im)
         cv2.waitKey(0)
@@ -108,7 +107,7 @@ def infer_video(model, project_dir, source_path):
 
         results = model.predict(
             source=frame,
-            device=0,
+            device="cpu",      # <- changed from 0 to "cpu"
             conf=CONF_THRESH,
             imgsz=IMG_SIZE,
             verbose=False
@@ -116,10 +115,10 @@ def infer_video(model, project_dir, source_path):
 
         annotated_frame = results[0].plot()  # original size
 
-        # --- SAVE frame (original size) ---
+        # SAVE frame (original size)
         writer.write(annotated_frame)
 
-        # --- DISPLAY (resized) ---
+        # DISPLAY (resized)
         display_frame = resize_for_display(annotated_frame).copy()
         cv2.imshow(WINDOW_NAME_VIDEO, display_frame)
         if cv2.waitKey(1) & 0xFF == ord("q"):
@@ -148,7 +147,7 @@ def infer_webcam(model, project_dir, cam_index=0):
 
         results = model.predict(
             source=frame,
-            device=0,
+            device="cpu",      # <- changed from 0 to "cpu"
             conf=CONF_THRESH,
             imgsz=IMG_SIZE,
             verbose=False
@@ -168,20 +167,18 @@ def infer_webcam(model, project_dir, cam_index=0):
 def main():
     model, project_dir = load_model()
 
-    # === CHOOSE WHAT YOU WANT TO TEST ===
-
-    # 1) Single image
-    image_path = r"demo image/car.jpg"
+    # 1) Single image (your demo image in the repo)
+    image_path = "demo image/car.jpg"
     infer_image(model, project_dir, image_path)
 
-    # 2) Video file
-    # video_path = r"C:\Users\Billy Fung\Desktop\test_videos\traffic.mp4"
+    # 2) Video file (optional – update path and uncomment)
+    # video_path = "demo video/traffic.mp4"
     # infer_video(model, project_dir, video_path)
 
-    # 3) Webcam (optional, does not save by default)
+    # 3) Webcam (optional)
     # infer_webcam(model, project_dir, cam_index=0)
 
-    print("\nEdit infer_vehicle.py -> main() to uncomment image_path or video_path you want to test.")
+    print("\nEdit infer_vehicle.py -> main() to change image/video/webcam options.")
 
 
 if __name__ == "__main__":
