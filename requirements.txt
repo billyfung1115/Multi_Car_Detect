@@ -1,18 +1,25 @@
-# Minimal requirements for Multi_Car_Detect
-# Adjust versions as needed for your system/GPU (CUDA) support
+# Minimal pinned requirements for Multi_Car_Detect (matched to this workspace)
+# These versions match the project's `.venv` on this machine. Adjust if you need a different CUDA build.
 
-ultralytics>=8.0.0
-opencv-python>=4.7.0
-numpy>=1.26.0
-# PyTorch: pick a stable release compatible with your CUDA (or CPU-only)
-# Example (CPU-only):
-# torch==2.2.2+cpu torchvision==0.18.3+cpu -f https://download.pytorch.org/whl/torch_stable.html
-# Example (CUDA 12.1):
-# torch==2.2.2+cu121 torchvision==0.18.3+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+ultralytics==8.3.233
+opencv-python==4.12.0.88
+numpy==2.2.6
+PyYAML==6.0.3
 
-# If you only want a simple install that lets pip pick the right torch, uncomment:
+# PyTorch / TorchVision / Torchaudio (GPU wheels). These are CUDA 13.0 builds used in this environment:
+# The `+cu130` wheel tags require installing from the PyTorch wheel index.
+# To reproduce the exact setup on another machine, run (example):
+#
+# pip install torch==2.9.1+cu130 torchvision==0.24.1+cu130 torchaudio==2.9.1+cu130 \
+#     -f https://download.pytorch.org/whl/torch_stable.html
+#
+# If you prefer CPU-only builds, pick the `+cpu` versions instead, for example:
+# pip install torch==2.9.1+cpu torchvision==0.24.1+cpu torchaudio==2.9.1+cpu \
+#     -f https://download.pytorch.org/whl/torch_stable.html
+
+# NOTE: pip cannot always resolve platform-specific wheel tags automatically. Use the explicit
+# commands above for reproducible CUDA / CPU installs. If you want pip to choose the best
+# available build for you (may install CPU-only), uncomment the two lines below instead:
 # torch
 # torchvision
 
-# Optional but commonly useful
-pyyaml>=6.0

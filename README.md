@@ -4,108 +4,192 @@ Project to train and run YOLO-based vehicle detection (Ultralytics). This reposi
 
 ---
 
-## Contents
-- `train.py` - Train a YOLO model on the `vehicle.yaml` dataset.
-- `validation.py` - Run validation using a trained `best.pt` from a given run.
-- `infer_vehicle.py` - Run inference (image, video, webcam) using the YOLOv8-trained weights (`runs/train_vehicle/weights/best.pt`). Saves annotated outputs to `predictions/`.
-- `infer_vehicle_v11.py` - Same as above but for the YOLOv11n-trained run (`runs/train_vehicle_v11n_e40/weights/best.pt`). Saves to `predictions_v11/`.
-- `compare_modes.py` - Evaluate two different trained runs and print a side-by-side summary of selected metrics.
-- `main.py` - Small placeholder script.
-- `vehicle.yaml` - Dataset configuration used by Ultralytics training/validation.
-- `requirements.txt` - Project dependencies and installation guidance.
-- `runs/` - Output folder created by training/validation with logs and weights.
-- `predictions/`, `predictions_v11/` - Annotated outputs from inference.
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Folder Structure](#folder-structure)
+- [Getting Started in Google Colab](#getting-started-in-google-colab)
+- [Quick Setup (Windows PowerShell)](#quick-setup-windows-powershell)
+- [Quick Setup (Linuxmacos)](#quick-setup-linuxmacos)
+- [Requirements](#requirements)
+- [Usage](#usage)
+- [Environment Check](#environment-check)
+- [Outputs](#outputs)
+- [Notes](#notes)
 
 ---
 
-## Quick setup (Windows PowerShell)
+## Project Overview
 
-1. Create a virtual environment (if you don't have one):
+Multi_Car_Detect is a collection of scripts to train and run YOLO-based vehicle detection using the Ultralytics library. The repository contains training, validation, inference, and comparison utilities for experiments using YOLOv8 and YOLOv11 models.
 
-```powershell
-cd "C:\Users\Billy Fung\Desktop\Multi_Car_Detect"
-python -m venv .venv
-```
+**Remark:**
+The original training was performed using GPU hardware for efficiency. However, due to compute limitations in free Colab environments, code defaults and examples have been updated to use CPU by default. If you have access to a GPU (locally or in a Colab Pro session), you can modify scripts to use GPU by setting device=0 or device="cuda" as appropriate.
+---
 
-2. Activate the venv (PowerShell v5.1):
+## Folder Structure
 
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
-& ".\.venv\Scripts\Activate.ps1"
-```
+After cloning, your folder structure should look like:
 
-3. Install dependencies. The `requirements.txt` contains guidance for `torch` which often needs CUDA-specific wheels. A minimal install (pip will choose CPU torch if unspecified):
 
-```powershell
-python -m pip install -r requirements.txt
-```
+Multi_Car_Detect/
+  ├── Multi_Car_Detect/
+  │     ├── train.py
+  │     ├── validation.py
+  │     ├── infer_vehicle.py
+  │     ├── infer_vehicle_v11.py
+  │     ├── compare_modes.py
+  │     ├── main.py
+  │     ├── vehicle.yaml
+  │     ├── requirements.txt
+  │     ├── README.md
+  │     └── ...
+  ├── .gitignore
+  ├── requirements.txt
+  ├── README.md
+  └── ...
 
-If you need GPU-enabled PyTorch, use the official PyTorch installation instructions and wheel index. Example (replace version/CUDA to match your environment):
-
-```powershell
-# Example CPU-only wheels (explicit):
-# pip install torch==2.2.2+cpu torchvision==0.18.3+cpu -f https://download.pytorch.org/whl/torch_stable.html
-
-# Example CUDA 12.1 (replace with your CUDA version):
-# pip install torch==2.2.2+cu121 torchvision==0.18.3+cu121 -f https://download.pytorch.org/whl/torch_stable.html
-```
+> *Note:* Most scripts and requirements are in the inner Multi_Car_Detect directory.
 
 ---
 
-## How each script is used
+## Getting Started in Google Colab
 
-- `train.py`
-	- Purpose: Train a model using Ultralytics YOLO.
-	- Default in `main()` trains `yolo11n.pt` for 40 epochs and writes results under `runs/train_vehicle_v11n_e40`.
-	- Example:
+You can run this project directly in [Google Colab](https://colab.research.google.com/):
 
-```powershell
-python train.py
-```
+python
+# Clone the repo
+!git clone https://github.com/billyfung1115/Multi_Car_Detect.git
 
-- `validation.py`
-	- Purpose: Run validation using a specific `best.pt` from `runs/train_vehicle/weights/best.pt`.
-	- Example:
+# Install dependencies
+!pip install -r Multi_Car_Detect/Multi_Car_Detect/requirements.txt
 
-```powershell
-python validation.py
-```
+# (Optional) Display README in Colab
+from IPython.display import Markdown, display
+with open('Multi_Car_Detect/Multi_Car_Detect/README.md', 'r', encoding='utf-8') as f:
+    display(Markdown(f.read()))
 
-- `infer_vehicle.py` and `infer_vehicle_v11.py`
-	- Purpose: Run inference on a single image, a video file, or webcam. Edit the `main()` function to set `image_path` or `video_path` (examples are commented inline).
-	- Output: annotated images/videos saved to `predictions/` (v8) or `predictions_v11/` (v11).
-	- Example (set `image_path` inside file then run):
 
-```powershell
-python infer_vehicle.py
-# or
-python infer_vehicle_v11.py
-```
-
-	- While a video or webcam is running, press `q` to quit the live display loop.
-
-- `compare_modes.py`
-	- Purpose: Load two `best.pt` files (YOLOv8 run and YOLOv11 run), run `.val()` on each using the `vehicle.yaml` dataset, and print metrics and a short summary table.
-	- Requires the two runs to exist:
-		- `runs/train_vehicle/weights/best.pt`
-		- `runs/train_vehicle_v11n_e40/weights/best.pt`
-	- Example:
-
-```powershell
-python compare_modes.py
-```
+*Tip:*  
+Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best performance.
 
 ---
 
-## Outputs and where to find them
-- Training and validation results: `runs/<run_name>/` (weights under `runs/<run_name>/weights/`)
-- Annotated inference outputs: `predictions/` and `predictions_v11/`
+## Quick Setup (Windows PowerShell)
+
+1. *Create and activate a virtual environment:*
+
+   powershell
+   cd "C:\Users\Billy Fung\Desktop\Multi_Car_Detect\Multi_Car_Detect"
+   python -m venv .venv
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+   & ".\.venv\Scripts\Activate.ps1"
+   
+
+2. *Install dependencies:*  
+   The requirements.txt contains guidance for torch which often needs CUDA-specific wheels.  
+   Minimal install (pip will choose CPU torch if unspecified):
+
+   powershell
+   python -m pip install -r requirements.txt
+   
+
+   If you need GPU-enabled PyTorch, use the official PyTorch installation instructions and wheel index. Example:
+
+   powershell
+   # Example CPU-only wheels (explicit):
+   # pip install torch==2.2.2+cpu torchvision==0.18.3+cpu -f https://download.pytorch.org/whl/torch_stable.html
+
+   # CUDA 13.0:
+   # pip install torch==2.2.2+cu130 torchvision==0.18.3+cu130 -f https://download.pytorch.org/whl/torch_stable.html
+   
 
 ---
 
-## Notes & tips
-- Edit `infer_vehicle.py` / `infer_vehicle_v11.py` `main()` to conveniently point to test images or videos.
-- `train.py` uses `device=0` (first GPU). Change `device` to `"cpu"` or another index if needed.
-- Metric key names printed by `compare_modes.py` depend on the installed `ultralytics` version; you may need to adjust the `keys` list in that file if keys differ.
+## Quick Setup (LinuxmacOS)
+
+bash
+cd Multi_Car_Detect/Multi_Car_Detect
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 
 
+For GPU-enabled PyTorch, follow the [official install guide](https://pytorch.org/get-started/locally/) and use the appropriate CUDA wheels.
+
+---
+
+## Requirements
+
+- Python 3.11+ (virtual environment recommended)
+- See requirements.txt for pinned package versions and wheel guidance.
+
+---
+
+## Usage
+
+All scripts are in the inner Multi_Car_Detect folder. Make sure you are in that directory before running the following commands.
+
+- *Train a model:*
+
+  bash
+  python train.py
+  
+  - Default: trains yolo11n.pt for 40 epochs, saves to runs/train_vehicle_v11n_e40/.
+
+- *Run validation:*
+
+  bash
+  python validation.py
+  
+  - Requires trained weights in runs/<run_name>/weights/best.pt.
+
+- *Run inference:*
+
+  bash
+  python infer_vehicle.py
+  python infer_vehicle_v11.py
+  
+  - Edit the main() function in each script to set image_path or video_path.
+  - Annotated outputs are saved to predictions/ (YOLOv8) or predictions_v11/ (YOLOv11).
+
+- *Compare two training runs:*
+
+  bash
+  python compare_modes.py
+  
+  - Requires:
+    - runs/train_vehicle/weights/best.pt
+    - runs/train_vehicle_v11n_e40/weights/best.pt
+  - Prints side-by-side summary metrics.
+
+---
+
+## Environment Check
+
+The repository contains scripts/env_info.py to display versions for Python, torch, torchvision, torchaudio, ultralytics, and OpenCV, plus CUDA availability and device info.
+
+bash
+python scripts/env_info.py
+
+
+---
+
+## Outputs
+
+- *Training/validation logs and weights:* runs/<run_name>/
+- *Annotated inference outputs:* predictions/, predictions_v11/
+
+---
+
+## Notes
+
+- *Device selection:* Adjust device arguments in scripts as needed (e.g., device=0 for GPU, device="cpu" for CPU).
+- *Metric keys/fields:* Ultralytics output format may vary between versions; update compare_modes.py if needed.
+- *Colab tips:* Restart runtime if you experience issues with file deletion or environment.
+
+---
+
+For questions or contributions, feel free to open an issue or pull request!
+
+---

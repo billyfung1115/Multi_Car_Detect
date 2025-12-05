@@ -170,7 +170,7 @@ def main():
     model, project_dir = load_model()
 
     # 1) Single image (your demo image in the repo)
-    image_path = "demo image/car.jpg"
+    image_path = r"demo image\gogovan4.jpg"
     infer_image(model, project_dir, image_path)
 
     # 2) Video file (optional – update path and uncomment)
