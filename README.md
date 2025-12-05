@@ -108,11 +108,4 @@ python compare_modes.py
 - `train.py` uses `device=0` (first GPU). Change `device` to `"cpu"` or another index if needed.
 - Metric key names printed by `compare_modes.py` depend on the installed `ultralytics` version; you may need to adjust the `keys` list in that file if keys differ.
 
----
 
-If you'd like, I can:
-- Make the inference scripts accept command-line arguments for source and device.
-- Pin versions for `ultralytics` and `opencv-python` in `requirements.txt`.
-- Create a small wrapper to run any script with friendly CLI options.
-
-Feel free to tell me which of the above you want next.
