@@ -25,6 +25,7 @@ Multi_Car_Detect is a collection of scripts to train and run YOLO-based vehicle 
 
 **Remark:**
 The original training was performed using GPU hardware for efficiency. However, due to compute limitations in free Colab environments, code defaults and examples have been updated to use CPU by default. If you have access to a GPU (locally or in a Colab Pro session), you can modify scripts to use GPU by setting device=0 or device="cuda" as appropriate.
+
 ---
 
 ## Folder Structure
@@ -115,7 +116,7 @@ Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best per
    ```powershell
    
    python -m pip install -r requirements.txt
-   
+   ```
 
    If you need GPU-enabled PyTorch, use the official PyTorch installation instructions and wheel index. Example:
   
