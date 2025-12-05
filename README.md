@@ -31,51 +31,24 @@ The original training was performed using GPU hardware for efficiency. However, 
 
 After cloning, your folder structure should look like:
 
-
-<details>
-
-<summary><strong>Click to show a copy-paste friendly code block</strong></summary>
-
-<pre>
-
 ```
-
 Multi_Car_Detect/
-
-├── Multi_Car_Detect/
-
-│ ├── train.py
-
-│ ├── validation.py
-
-│ ├── infer_vehicle.py
-
-│ ├── infer_vehicle_v11.py
-
-│ ├── compare_modes.py
-
-│ ├── main.py
-
-│ ├── vehicle.yaml
-
-│ ├── requirements.txt
-
-│ └── README.md
-
-├── .gitignore
-
-├── requirements.txt
-
-├── README.md
-
-└── ...
-
+  ├── Multi_Car_Detect/
+  │     ├── train.py
+  │     ├── validation.py
+  │     ├── infer_vehicle.py
+  │     ├── infer_vehicle_v11.py
+  │     ├── compare_modes.py
+  │     ├── main.py
+  │     ├── vehicle.yaml
+  │     ├── requirements.txt
+  │     ├── README.md
+  │     └── ...
+  ├── .gitignore
+  ├── requirements.txt
+  ├── README.md
+  └── ...
 ```
-
-</pre>
-
-</details>
-
 > *Note:* Most scripts and requirements are in the inner Multi_Car_Detect directory.
 
 ---
