@@ -77,6 +77,7 @@ MULTI_CAR_DETECT/
 You can run this project directly in [Google Colab](https://colab.research.google.com/):
 
 python
+```
 # Clone the repo
 !git clone https://github.com/billyfung1115/Multi_Car_Detect.git
 
@@ -87,7 +88,7 @@ python
 from IPython.display import Markdown, display
 with open('Multi_Car_Detect/Multi_Car_Detect/README.md', 'r', encoding='utf-8') as f:
     display(Markdown(f.read()))
-
+```
 
 *Tip:*  
 Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best performance.
@@ -99,10 +100,12 @@ Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best per
 1. *Create and activate a virtual environment:*
 
    powershell
+   ```
    cd "C:\Users\Billy Fung\Desktop\Multi_Car_Detect\Multi_Car_Detect"
    python -m venv .venv
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
    & ".\.venv\Scripts\Activate.ps1"
+   ```
    
 
 2. *Install dependencies:*  
@@ -110,28 +113,32 @@ Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best per
    Minimal install (pip will choose CPU torch if unspecified):
 
    powershell
+   ```
    python -m pip install -r requirements.txt
    
 
    If you need GPU-enabled PyTorch, use the official PyTorch installation instructions and wheel index. Example:
-
+  ```
    powershell
+   ```
    # Example CPU-only wheels (explicit):
    # pip install torch==2.2.2+cpu torchvision==0.18.3+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
    # CUDA 13.0:
    # pip install torch==2.2.2+cu130 torchvision==0.18.3+cu130 -f https://download.pytorch.org/whl/torch_stable.html
-   
+   ```
 
 ---
 
 ## Quick Setup (LinuxmacOS)
 
 bash
+```
 cd Multi_Car_Detect/Multi_Car_Detect
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+```
 
 
 For GPU-enabled PyTorch, follow the [official install guide](https://pytorch.org/get-started/locally/) and use the appropriate CUDA wheels.
