@@ -76,8 +76,8 @@ MULTI_CAR_DETECT/
 
 You can run this project directly in [Google Colab](https://colab.research.google.com/):
 
-python
-```
+```python
+
 # Clone the repo
 !git clone https://github.com/billyfung1115/Multi_Car_Detect.git
 
@@ -99,8 +99,8 @@ Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best per
 
 1. *Create and activate a virtual environment:*
 
-   powershell
-   ```
+   ```powershell
+   
    cd "C:\Users\Billy Fung\Desktop\Multi_Car_Detect\Multi_Car_Detect"
    python -m venv .venv
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
@@ -112,15 +112,15 @@ Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best per
    The requirements.txt contains guidance for torch which often needs CUDA-specific wheels.  
    Minimal install (pip will choose CPU torch if unspecified):
 
-   powershell
-   ```
+   ```powershell
+   
    python -m pip install -r requirements.txt
    
 
    If you need GPU-enabled PyTorch, use the official PyTorch installation instructions and wheel index. Example:
-  ```
-   powershell
-   ```
+  
+   ```powershell
+   
    # Example CPU-only wheels (explicit):
    # pip install torch==2.2.2+cpu torchvision==0.18.3+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
@@ -132,8 +132,8 @@ Select a GPU runtime in Colab (Runtime > Change runtime type > GPU) for best per
 
 ## Quick Setup (LinuxmacOS)
 
-bash
-```
+```bash
+
 cd Multi_Car_Detect/Multi_Car_Detect
 python3 -m venv .venv
 source .venv/bin/activate
