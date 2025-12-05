@@ -29,11 +29,7 @@ def resize_for_display(img, max_width=MAX_DISPLAY_WIDTH):
 def load_model():
     project_dir = Path(__file__).resolve().parent
 
-    # >>> POINT THIS TO YOUR YOLOv11n RUN <<<
-    # If your YOLOv11n training script used:
-    #   project = "runs"
-    #   name    = "train_vehicle_v11n_e40"
-    # then best.pt is here:
+    # Points to your YOLOv11n training run
     weights_path = project_dir / "runs" / "train_vehicle_v11n_e40" / "weights" / "best.pt"
 
     if not weights_path.exists():
@@ -54,7 +50,7 @@ def infer_image(model, project_dir, source_path):
 
     results = model(
         str(source_path),
-        device=0,
+        device="cpu",          # <- changed from 0 to "cpu"
         conf=CONF_THRESH,
         imgsz=IMG_SIZE
     )
@@ -113,7 +109,7 @@ def infer_video(model, project_dir, source_path):
 
         results = model.predict(
             source=frame,
-            device=0,
+            device="cpu",      # <- changed from 0 to "cpu"
             conf=CONF_THRESH,
             imgsz=IMG_SIZE,
             verbose=False
@@ -153,7 +149,7 @@ def infer_webcam(model, project_dir, cam_index=0):
 
         results = model.predict(
             source=frame,
-            device=0,
+            device="cpu",      # <- changed from 0 to "cpu"
             conf=CONF_THRESH,
             imgsz=IMG_SIZE,
             verbose=False
@@ -173,20 +169,18 @@ def infer_webcam(model, project_dir, cam_index=0):
 def main():
     model, project_dir = load_model()
 
-    # === CHOOSE WHAT YOU WANT TO TEST ===
-
-    # 1) Single image
-    image_path = r"C:\Users\Billy Fung\Downloads\a23a3768-8e98-47f3-baf8-592b4a894fad.jpg"
+    # 1) Single image (your demo image in the repo)
+    image_path = "demo image/car.jpg"
     infer_image(model, project_dir, image_path)
 
-    # 2) Video file
-    # video_path = r"C:\Users\Billy Fung\Desktop\test_videos\traffic.mp4"
+    # 2) Video file (optional – update path and uncomment)
+    # video_path = "demo video/traffic.mp4"
     # infer_video(model, project_dir, video_path)
 
     # 3) Webcam (optional)
     # infer_webcam(model, project_dir, cam_index=0)
 
-    print("\nEdit infer_vehicle_v11.py -> main() to uncomment image_path or video_path you want to test.")
+    print("\nEdit infer_vehicle_v11.py -> main() to change image/video/webcam options.")
 
 
 if __name__ == "__main__":
